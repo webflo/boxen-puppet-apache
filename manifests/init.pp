@@ -18,6 +18,7 @@ class apache {
     $apache::config::configdir,
     $apache::config::logdir,
     $apache::config::sitesdir,
+    $apache::config::portdir,
   ]:
     ensure => directory,
     owner  => root,

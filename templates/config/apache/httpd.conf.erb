@@ -498,4 +498,6 @@ SSLRandomSeed connect builtin
 
 Include <%= scope.lookupvar "apache::config::configdir" %>/other/*.conf
 
+Include <%= scope.lookupvar "apache::config::portdir" %>/*.conf
+
 Include <%= scope.lookupvar "apache::config::sitesdir" %>/*.conf

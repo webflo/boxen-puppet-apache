@@ -1,3 +1,3 @@
 class apache::homebrew::apache {
-  apache::homebrew::tap { 'homebrew/apache': }
+  ::homebrew::tap { 'homebrew/apache': }
 }

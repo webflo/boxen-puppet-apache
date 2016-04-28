@@ -4,8 +4,9 @@ class ModFastcgi < Formula
   url 'http://www.fastcgi.com/dist/mod_fastcgi-2.4.6.tar.gz'
   homepage 'http://www.fastcgi.com/'
   sha1 '69c56548bf97040a61903b32679fe3e3b7d3c2d4'
-
   version '2.4.6-boxen1'
+
+  mirror 'http://fossies.org/linux/www/apache_httpd_modules/mod_fastcgi-2.4.6.tar.gz'
 
   option "with-brewed-httpd22", "Use Homebrew's Apache httpd 2.2"
   option "with-brewed-httpd24", "Use Homebrew's Apache httpd 2.4"

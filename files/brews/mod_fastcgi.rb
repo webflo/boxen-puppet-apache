@@ -7,6 +7,7 @@ class ModFastcgi < Formula
   version '2.4.6-boxen1'
 
   mirror 'http://fossies.org/linux/www/apache_httpd_modules/mod_fastcgi-2.4.6.tar.gz'
+  mirror 'https://dl.bintray.com/homebrew/mirror/mod_fastcgi-2.4.6.tar.gz'
 
   option "with-brewed-httpd22", "Use Homebrew's Apache httpd 2.2"
   option "with-brewed-httpd24", "Use Homebrew's Apache httpd 2.4"
@@ -14,6 +15,13 @@ class ModFastcgi < Formula
 
   depends_on "httpd22" if build.with? "brewed-httpd22"
   depends_on "httpd24" if build.with? "brewed-httpd24"
+
+  if MacOS.version >= :sierra
+    depends_on "apr-util"
+    depends_on "apr"
+  else
+    depends_on :apr => :build
+  end
 
   def apache_apxs
     if build.with? "brewed-httpd22"
@@ -50,6 +58,11 @@ class ModFastcgi < Formula
   end
 
   def install
+    if MacOS.version >= :sierra
+      system "mkdir -p /Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.12.xctoolchain/usr/local/bin"
+      system "ln -nfs #{HOMEBREW_PREFIX}/opt/apr-util/bin/apu-1-config /Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.12.xctoolchain/usr/local/bin"
+      system "ln -nfs #{HOMEBREW_PREFIX}/opt/apr/bin/apr-1-config /Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.12.xctoolchain/usr/local/bin"
+    end
     system "#{apache_apxs} -o mod_fastcgi.so -c *.c"
     libexec.install ".libs/mod_fastcgi.so"
   end

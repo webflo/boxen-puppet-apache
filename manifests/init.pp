@@ -9,22 +9,18 @@ class apache {
     $apache::config::logdir,
     $apache::config::sitesdir,
     $apache::config::portdir,
+    "${apache::config::configdir}/other",
   ]:
-    ensure => directory,
-    owner  => root,
-    group  => wheel,
+    ensure => directory
   }
 
   file { $apache::config::configfile:
     content => template('apache/config/apache/httpd.conf.erb'),
-    notify  => Service['org.apache.httpd'],
-    owner   => root,
-    group   => wheel
+    notify  => Service['org.apache.httpd']
   }
 
   service { "org.apache.httpd":
-    ensure => running,
-    require => File[$apache::config::configfile]
+    ensure => stopped
   }
 
 }

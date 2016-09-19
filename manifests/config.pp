@@ -1,7 +1,7 @@
 class apache::config {
   require boxen::config
 
-  $configdir  = "/etc/apache2"
+  $configdir  = "/opt/boxen/homebrew/etc/apache2/2.4"
   $configfile = "${configdir}/httpd.conf"
   $sitesdir   = "${configdir}/sites"
   $portdir    = "${configdir}/port"

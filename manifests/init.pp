@@ -18,7 +18,8 @@ class apache {
     $apache::config::portdir,
     "${apache::config::configdir}/other",
   ]:
-    ensure => directory
+    ensure => directory,
+    require => Package['homebrew/apache/httpd24']
   }
 
   file { $apache::config::configfile:

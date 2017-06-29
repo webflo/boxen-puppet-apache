@@ -1,6 +1,7 @@
 class apache {
   require apache::config
   require homebrew
+  include apache::module::requirements
 
   file { '/Library/LaunchDaemons/dev.httpd.plist':
     content => template('apache/dev.httpd.plist.erb'),

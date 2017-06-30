@@ -84,7 +84,7 @@ LoadModule auth_basic_module libexec/mod_auth_basic.so
 #LoadModule cache_module libexec/mod_cache.so
 #LoadModule cache_disk_module libexec/mod_cache_disk.so
 #LoadModule cache_socache_module libexec/mod_cache_socache.so
-#LoadModule socache_shmcb_module libexec/mod_socache_shmcb.so
+LoadModule socache_shmcb_module libexec/mod_socache_shmcb.so
 #LoadModule socache_dbm_module libexec/mod_socache_dbm.so
 #LoadModule socache_memcache_module libexec/mod_socache_memcache.so
 #LoadModule watchdog_module libexec/mod_watchdog.so
@@ -268,7 +268,7 @@ DocumentRoot "/opt/boxen/homebrew/var/www/htdocs"
 # is requested.
 #
 <IfModule dir_module>
-    DirectoryIndex index.html
+    DirectoryIndex index.php index.html index.htm
 </IfModule>
 
 #
@@ -501,17 +501,20 @@ Include /opt/boxen/homebrew/etc/apache2/2.4/extra/proxy-html.conf
 </IfModule>
 
 # Secure (SSL/TLS) connections
-#Include /opt/boxen/homebrew/etc/apache2/2.4/extra/httpd-ssl.conf
+# Include /opt/boxen/homebrew/etc/apache2/2.4/extra/httpd-ssl.conf
 #
 # Note: The following must must be present to support
 #       starting without SSL on platforms with no /dev/random equivalent
 #       but a statically compiled-in mod_ssl.
 #
 <IfModule ssl_module>
-SSLRandomSeed startup builtin
-SSLRandomSeed connect builtin
+  SSLRandomSeed startup builtin
+  SSLRandomSeed connect builtin
 </IfModule>
 
-IncludeOptional <%= scope.lookupvar "apache::config::configdir" %>/other/*.conf
+# Enable h2
+Protocols h2 h2c http/1.1
+
+IncludeOptional <%= scope.lookupvar "apache::config::otherdir" %>/*.conf
 IncludeOptional <%= scope.lookupvar "apache::config::portdir" %>/*.conf
 IncludeOptional <%= scope.lookupvar "apache::config::sitesdir" %>/*.conf

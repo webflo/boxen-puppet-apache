@@ -5,6 +5,7 @@ class apache::config {
   $configfile = "${configdir}/httpd.conf"
   $sitesdir   = "${configdir}/sites"
   $portdir    = "${configdir}/port"
+  $otherdir   = "${configdir}/other"
 
   $executable = "/usr/sbin/httpd"
   $logdir     = "/var/log/apache2"

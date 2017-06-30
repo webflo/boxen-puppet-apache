@@ -17,7 +17,7 @@ class apache {
     $apache::config::logdir,
     $apache::config::sitesdir,
     $apache::config::portdir,
-    "${apache::config::configdir}/other",
+    $apache::config::otherdir,
   ]:
     ensure => directory,
     require => Package['homebrew/apache/httpd24']
@@ -25,6 +25,11 @@ class apache {
 
   file { $apache::config::configfile:
     content => template('apache/config/apache/httpd.conf.erb'),
+    notify  => Service['dev.httpd']
+  }
+
+  file { "$apache::config::otherdir/mod_ssl.conf":
+    content => template('apache/config/apache/modules/mod_ssl.conf.erb'),
     notify  => Service['dev.httpd']
   }
 

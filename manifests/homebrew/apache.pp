@@ -4,7 +4,8 @@ class apache::homebrew::apache {
   package { 'homebrew/apache/httpd24':
     ensure => 'latest',
     install_options => [
-      '--with-privileged-ports'
+      '--with-privileged-ports',
+      '--with-mpm-event'
     ]
   }
 }

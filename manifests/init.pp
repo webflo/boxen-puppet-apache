@@ -20,7 +20,7 @@ class apache {
     $apache::config::otherdir,
   ]:
     ensure => directory,
-    require => Package['homebrew/apache/httpd24']
+    require => Package['httpd']
   }
 
   file { $apache::config::configfile:
@@ -36,7 +36,7 @@ class apache {
   service { "dev.httpd":
     ensure  => running,
     enable => true,
-    require => Package['homebrew/apache/httpd24'],
+    require => Package['httpd'],
   }
 
   service { "org.apache.httpd":
@@ -44,7 +44,7 @@ class apache {
     ensure => stopped,
   }
 
-  service { "homebrew.mxcl.httpd24":
+  service { "homebrew.mxcl.httpd":
     before => Service['dev.httpd'],
     ensure => stopped,
     enable => false,

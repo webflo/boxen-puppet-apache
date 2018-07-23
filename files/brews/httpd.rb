@@ -3,6 +3,7 @@ class Httpd < Formula
   homepage "https://httpd.apache.org/"
   url "https://www.apache.org/dyn/closer.cgi?path=httpd/httpd-2.4.34.tar.bz2"
   sha256 "fa53c95631febb08a9de41fd2864cfff815cf62d9306723ab0d4b8d7aa1638f0"
+  version "2.4.34"
 
   bottle do
     sha256 "b9222c17b32a71e50280e0c7b2abe4403ba4bbe798740384abfd6c2945f0ff1f" => :high_sierra

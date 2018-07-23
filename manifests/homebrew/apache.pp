@@ -1,5 +1,8 @@
 class apache::homebrew::apache {
-  package { 'httpd':
-    ensure => 'latest'
+  homebrew::formula { 'httpd':
+    before => Package[$apache::config::package]
+  }
+  package { $apache::config::package:
+    ensure => '2.4.34'
   }
 }

@@ -6,6 +6,7 @@ class apache::config {
   $sitesdir   = "${configdir}/sites"
   $portdir    = "${configdir}/port"
   $otherdir   = "${configdir}/other"
+  $package    = "boxen/brews/httpd"
 
   $executable = "/usr/sbin/httpd"
   $logdir     = "/var/log/apache2"

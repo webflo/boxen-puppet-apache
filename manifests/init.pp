@@ -20,7 +20,7 @@ class apache {
     $apache::config::otherdir,
   ]:
     ensure => directory,
-    require => Package['httpd']
+    require => Package[$apache::config::package]
   }
 
   file { $apache::config::configfile:
@@ -36,7 +36,7 @@ class apache {
   service { "dev.httpd":
     ensure  => running,
     enable => true,
-    require => Package['httpd'],
+    require => Package[$apache::config::package],
   }
 
   service { "org.apache.httpd":

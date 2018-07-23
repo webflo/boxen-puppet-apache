@@ -3,6 +3,6 @@ class apache::homebrew::apache {
     before => Package[$apache::config::package]
   }
   package { $apache::config::package:
-    ensure => '2.4.34'
+    ensure => 'latest'
   }
 }
